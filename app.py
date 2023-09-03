@@ -7,6 +7,7 @@ from api.counter_picking import picking
 from api.user import user
 from middleware.auth_validator import jwt_middleware
 from pymongo import MongoClient
+from api.hero_data import hero_data
 
 load_dotenv()
 
@@ -17,6 +18,7 @@ CORS(app)
 app.before_request(jwt_middleware)
 app.register_blueprint(prediction)
 app.register_blueprint(picking)
+app.register_blueprint(hero_data)
 app.register_blueprint(user)
 
 
