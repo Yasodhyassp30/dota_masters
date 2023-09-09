@@ -9,7 +9,8 @@ def validate_prediction(data):
                 'schema': {
                     'id': {'type': 'integer', 'required': True},
                     'position': {'type': 'integer', 'required': True},
-                    'gpm': {'type': 'integer', 'required': True}
+                    'gpm': {'type': 'integer', 'required': True},
+                    'name':{ 'type': 'string', 'required': False}
                 }
             },'required':True,'maxlength':5
         },
@@ -20,7 +21,8 @@ def validate_prediction(data):
                 'schema': {
                     'id': {'type': 'integer', 'required': True},
                     'position': {'type': 'integer', 'required': True},
-                    'gpm': {'type': 'integer', 'required': True}
+                    'gpm': {'type': 'integer', 'required': True},
+                    'name':{ 'type': 'string', 'required': False}
                 }
             },'required':True,'maxlength':5
         }
