@@ -24,6 +24,8 @@ def predict():
         model = tf.keras.models.load_model('prediction/dota2_model.h5')
         prediction = model.predict(np_array)
 
+        
+
         return jsonify({'prediction':str(prediction)}),200
     except (ValueError, TypeError) as ve_te:
         return jsonify({'error': 'Invalid data format: ' + str(ve_te)}), 400
