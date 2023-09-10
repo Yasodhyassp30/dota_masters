@@ -14,7 +14,8 @@ def jwt_middleware():
         token = auth_header.split(' ')[1]
         try:
             payload  = jwt.decode(token, os.environ["SECRET_KEY"], algorithms=['HS256'])
-            request.json['uid'] = payload['id']
+            if request.path == '/api/save_match' or request.path == '/api/get_matches':
+                request.json['uid'] = payload['id']
         except jwt.ExpiredSignatureError:
             return jsonify({"error": "Expired JWT token"}), 401
         except jwt.InvalidTokenError:

@@ -38,13 +38,15 @@ def get_matches():
         db =  current_app.config['Mongo_db']
         user = request.json
         pipe = [
-            {"$match":{"uid":user['id']}},
+            {"$match":{"uid":user['uid']}},
             {"$skip":(user['page']-1)*10},
             {"$limit":10}
         ]
         results = list(db.matches.aggregate(pipe))
-        return jsonify({'match':results}),200
+        data= json.loads(json_util.dumps(results))
+        return jsonify({'matches':data}),200
     except Exception as e:
+        print(e)
         return jsonify({'error':'An unexpected error occurred'}),500
 
 @hero_data.route('/provide_feedback',methods = ['PUT'])
