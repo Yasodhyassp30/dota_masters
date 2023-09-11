@@ -57,10 +57,19 @@ def provide_feedback():
         db.matches.find_one_and_update(
             {"_id":ObjectId(match_data['id'])},
             {"$set":{
-                "actual_result": match_data['result']
+                "feedback": match_data['feedback']
             }},upsert =False
         )
         return jsonify({'msg':"Feedback added"}),200
     except Exception as e:
          return jsonify({'error':'An unexpected error occurred'}),500
     
+@hero_data.route('/delete_match',methods = ['DELETE'])
+def delete_match():
+    try:
+        db = current_app.config['Mongo_db']
+        match_data = request.json
+        db.matches.delete_one({"_id":ObjectId(match_data['id'])})
+        return jsonify({'msg':"Match record deleted"}),200
+    except Exception as e:
+        return jsonify({'error':'An unexpected error occurred'}),500
