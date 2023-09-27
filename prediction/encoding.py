@@ -1,6 +1,11 @@
 import pandas as pd
 
 df =pd.read_csv("cleaned_data.csv")
+for i in range(1,6):
+    df = pd.get_dummies(df, columns=['radiant_player_'+str(i)+'_position'], prefix='radiant_player_'+str(i)+'position')
+
+for i in range(1,6):
+    df = pd.get_dummies(df, columns=['dire_player_'+str(i)+'_position'], prefix='diret_player_'+str(i)+'position')
 
 for i in range(1,125):
     df[i]="0"

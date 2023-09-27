@@ -45,3 +45,30 @@ model_filename = 'gmm_model.pkl'
 joblib.dump(gmm, model_filename)
 
 print(f"GMM model exported as {model_filename}")
+
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots(figsize=(10, 6))
+
+colors = plt.cm.nipy_spectral(np.linspace(0, 1, num_clusters))
+
+cluster_centers = gmm.means_
+
+
+for cluster_num in range(num_clusters):
+    cluster_name = f"Cluster {cluster_num + 1}"
+    
+    cluster_data_points = data_values[cluster_assignments == cluster_num]
+    
+    ax.scatter(cluster_data_points[:, 0], cluster_data_points[:, 1], label=cluster_name, c=colors[cluster_num], s=50)
+    
+    circle = plt.Circle((cluster_centers[cluster_num, 0], cluster_centers[cluster_num, 1]), radius=0.15, color=colors[cluster_num], fill=False)
+    ax.add_artist(circle)
+
+
+ax.set_title('Gaussian Mixture Model Clustering')
+ax.set_xlabel('Feature 1')
+ax.set_ylabel('Feature 2')
+ax.legend()
+
+plt.show()
+

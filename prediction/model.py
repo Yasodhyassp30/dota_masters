@@ -16,7 +16,7 @@ y = encoded['winner_id']
 X = X.to_numpy().astype('float32')
 y = y.to_numpy().astype('float32')
 
-n_splits = 5
+n_splits = 2
 roc_auc_scores = []
 f1_scores = []
 accuracy_scores = []  
@@ -28,19 +28,17 @@ for train_indices, val_indices in kf.split(X):
     y_train, y_val = y[train_indices], y[val_indices]
 
     model = keras.Sequential([
-        tf.keras.layers.InputLayer(input_shape=(144)),
-        keras.layers.Dense(256, activation='tanh'),
-        Dropout(0.5),
-        keras.layers.Dense(128, activation='relu'),
+        tf.keras.layers.InputLayer(input_shape=(184)),
+        keras.layers.Dense(256, activation='relu'),
         Dropout(0.3),
         keras.layers.Dense(64, activation='relu'),
-        Dropout(0.3),
-        keras.layers.Dense(32, activation='relu'),
         keras.layers.Dense(16, activation='relu'),
         keras.layers.Dense(1, activation='sigmoid')
     ])
 
-    optimizer = tf.keras.optimizers.Adam(learning_rate=0.0001)
+    print(model.summary())
+
+    optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
 
     model.compile(optimizer=optimizer,
                   loss=tf.keras.losses.BinaryCrossentropy(),
@@ -50,7 +48,7 @@ for train_indices, val_indices in kf.split(X):
 
     model.fit(X_train,
               y_train,
-              epochs=10,
+              epochs=20,
               batch_size=8192,
               validation_data=(X_val, y_val),
               callbacks=[early_stopping],
@@ -74,3 +72,5 @@ mean_f1 = np.mean(f1_scores)
 print(f"Mean Accuracy Across {n_splits} Folds: {mean_accuracy:.4f}")
 print(f"Mean ROC-AUC Across {n_splits} Folds: {mean_roc_auc:.4f}")
 print(f"Mean F1-Score Across {n_splits} Folds: {mean_f1:.4f}")
+
+model.save('dota2_model.h5')

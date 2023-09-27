@@ -68,4 +68,5 @@ def login():
     except (ValueError, TypeError) as ve_te:
         return jsonify({'error': 'Invalid data format: ' + str(ve_te)}), 400
     except Exception as e:
+        print(e)
         return jsonify({'error': 'An unexpected error occurred'}), 500
