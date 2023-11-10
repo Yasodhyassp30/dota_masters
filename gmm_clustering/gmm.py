@@ -11,8 +11,8 @@ data = pd.read_csv('gmm_hero_weakness.csv')
 names = data.iloc[:, 0].values
 data_values = data.iloc[:, 1:].values
 
-num_clusters = 15 
-gmm = GaussianMixture(n_components=num_clusters, random_state=0)
+num_clusters = 30 
+gmm = GaussianMixture(n_components=num_clusters, random_state=42)
 gmm.fit(data_values)
 cluster_assignments = gmm.predict(data_values)
 

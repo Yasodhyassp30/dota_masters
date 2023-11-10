@@ -15,7 +15,7 @@ app = Flask(__name__)
 client  = MongoClient(os.getenv('MONGO_URI'))
 app.config['Mongo_db'] = client.dota_masters
 CORS(app)
-app.before_request(jwt_middleware)
+#app.before_request(jwt_middleware)
 app.register_blueprint(prediction)
 app.register_blueprint(picking)
 app.register_blueprint(hero_data)
