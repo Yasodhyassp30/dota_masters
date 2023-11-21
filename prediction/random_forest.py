@@ -12,9 +12,6 @@ encoded = encoded.sample(frac=1)
 encoded.pop('radiant_team_id')
 encoded.pop('dire_team_id')
 encoded.pop('match_duration_seconds')
-for i in range(1, 6):
-    encoded.pop('radiant_player_' + str(i)+"_networth")
-    encoded.pop('dire_player_' + str(i)+"_networth")
 
 y_train = encoded.pop('winner_id')
 train = encoded.to_numpy().astype('float32')
@@ -22,7 +19,7 @@ trainlabels = y_train.to_numpy().astype('float32')
 
 X_train, X_test, y_train, y_test = train_test_split(train, trainlabels, test_size=0.1, random_state=42)
 
-random_forest_classifier = RandomForestClassifier(n_estimators=1000, random_state=42)
+random_forest_classifier = RandomForestClassifier(n_estimators=2000, random_state=42)
 random_forest_classifier.fit(X_train, y_train)
 
 

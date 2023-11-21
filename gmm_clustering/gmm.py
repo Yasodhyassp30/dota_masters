@@ -11,7 +11,7 @@ data = pd.read_csv('gmm_hero_weakness.csv')
 names = data.iloc[:, 0].values
 data_values = data.iloc[:, 1:].values
 
-num_clusters = 30 
+num_clusters = 18
 gmm = GaussianMixture(n_components=num_clusters, random_state=42)
 gmm.fit(data_values)
 cluster_assignments = gmm.predict(data_values)
@@ -22,7 +22,8 @@ cluster_counts = np.bincount(cluster_assignments)
 
 
 
-print(f"Silhouette Score: {silhouette_avg}")
+print(f"Silhouette Score: {gmm.bic(data_values)}")
+print(f"Silhouette Score: {gmm.aic(data_values)}")
 
 cluster_info = {}
 for cluster_num in range(num_clusters):

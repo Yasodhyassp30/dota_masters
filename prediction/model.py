@@ -39,7 +39,7 @@ model = keras.Sequential([
 
 print(model.summary())
 
-optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
+optimizer = tf.keras.optimizers.Adam(learning_rate=0.0001)
 
 model.compile(optimizer=optimizer,
                 loss=tf.keras.losses.BinaryCrossentropy(),
@@ -49,7 +49,7 @@ early_stopping = EarlyStopping(monitor='val_loss', patience=5, restore_best_weig
 
 model.fit(X_train,
             y_train,
-            epochs=30,
+            epochs=100,
             batch_size=64,
             validation_data=(X_val, y_val),
             verbose=1)

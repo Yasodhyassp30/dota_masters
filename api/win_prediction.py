@@ -7,7 +7,7 @@ prediction= Blueprint('prediction',__name__,url_prefix='/api')
 
 @prediction.route('/predict',methods=['POST'])
 def predict():
-    team_array = list([0]*184)
+    team_array = list([0]*308)
     try:
         data=request.json
         validate_prediction(data)
@@ -18,17 +18,19 @@ def predict():
             team_array[data['radiant'][i]['id']+59] = 1
             team_array[i+5] = data['dire'][i]['gpm']
             team_array[34 + data['dire'][i]['position'] + i*5] = 1
-            team_array[data['dire'][i]['id']+59] = -1
+            team_array[data['dire'][i]['id']+183] = 1
        
         np_array = np.array(team_array).astype('float32')
-        np_array = np_array.reshape(-1, 184)
+        print(np_array.shape)
+        np_array = np_array.reshape(-1, 308)
         model = tf.keras.models.load_model('prediction/dota2_model.h5')
         prediction = model.predict(np_array)
-
+        prediction =np.round(prediction, 2)
         
 
         return jsonify({'prediction':str(prediction)}),200
     except (ValueError, TypeError) as ve_te:
+        print(ve_te)
         return jsonify({'error': 'Invalid data format: ' + str(ve_te)}), 400
     except Exception as e:
         return jsonify({'error': 'An unexpected error occurred'}), 500

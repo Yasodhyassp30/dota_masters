@@ -39,8 +39,8 @@ def get_matches():
         user = request.json
         pipe = [
             {"$match":{"uid":user['uid']}},
-            {"$skip":(user['page']-1)*10},
-            {"$limit":10}
+            {"$skip":(user['page']-1)*100},
+            {"$limit":100}
         ]
         results = list(db.matches.aggregate(pipe))
         data= json.loads(json_util.dumps(results))
