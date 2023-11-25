@@ -73,4 +73,3 @@ print(f"Mean Accuracy Across {n_splits} Folds: {mean_accuracy:.4f}")
 print(f"Mean ROC-AUC Across {n_splits} Folds: {mean_roc_auc:.4f}")
 print(f"Mean F1-Score Across {n_splits} Folds: {mean_f1:.4f}")
 
-model.save('dota2_model.h5')

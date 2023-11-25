@@ -21,14 +21,15 @@ def predict():
             team_array[data['dire'][i]['id']+183] = 1
        
         np_array = np.array(team_array).astype('float32')
-        print(np_array.shape)
         np_array = np_array.reshape(-1, 308)
         model = tf.keras.models.load_model('prediction/dota2_model.h5')
         prediction = model.predict(np_array)
-        prediction =np.round(prediction, 2)
+        prediction =np.round(prediction, 4)
+        prediction_list = prediction.tolist()
         
-
-        return jsonify({'prediction':str(prediction)}),200
+        prediction_list[0][0] = round(prediction_list[0][0],4)
+        print(prediction_list)
+        return jsonify({'prediction': str(prediction_list)}), 200
     except (ValueError, TypeError) as ve_te:
         print(ve_te)
         return jsonify({'error': 'Invalid data format: ' + str(ve_te)}), 400

@@ -42,6 +42,7 @@ def get_matches():
             {"$skip":(user['page']-1)*100},
             {"$limit":100}
         ]
+
         results = list(db.matches.aggregate(pipe))
         data= json.loads(json_util.dumps(results))
         return jsonify({'matches':data}),200

@@ -33,8 +33,8 @@ def validate_match(data):
         'prediction':{
             'type':'dict',
             'schema':{
-                'radiant':{'type':'integer','required':True},
-                'dire':{'type':'integer','required':True}
+                'radiant':{'type':'float','required':True},
+                'dire':{'type':'float','required':True}
             },'required':True,
         },
         'feedback':{'type': 'integer', 'required': False},
