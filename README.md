@@ -11,8 +11,8 @@ Welcome to the backend of DOTA MASTERS! This Flask application serves as the eng
 - **MongoDB Integration**: Utilize MongoDB for efficient storage and retrieval of data related to DOTA 2 matches, heroes, and users.
 - **Model Integration**:
 -  [Dataset](https://www.kaggle.com/datasets/darianogina/dota-2-matches-pro-leagues/data)
-  - **GMM Clustering for Counterpicking**: Employ Gaussian Mixture Model (GMM) clustering to provide intelligent hero counterpicking suggestions based on opponents' picks.
-  - **DNN for Win Prediction**: Utilize Deep Neural Networks (DNN) to predict match outcomes, empowering users with insightful win probability estimates.
+  - **GMM Clustering for Counterpicking**: Employ Gaussian Mixture Model (GMM) clustering to provide hero counterpicking suggestions.
+  - **DNN for Win Prediction**: Utilize Deep Neural Networks (DNN) to predict match outcomes.
 
 
 
